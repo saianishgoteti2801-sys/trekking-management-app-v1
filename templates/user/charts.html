@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}
+
+My Trekking Analytics
+
+{% endblock %}
+
+{% block content %}
+
+<h2 class="mb-4">
+
+    My Trekking History
+
+</h2>
+
+
+<div class="card shadow p-4">
+
+    <canvas id="historyChart"></canvas>
+
+</div>
+
+
+<script>
+
+const labels = JSON.parse('{{ labels | tojson | safe }}');
+
+const values = JSON.parse('{{ booking_values | tojson | safe }}');
+
+
+new Chart(
+
+    document.getElementById(
+        "historyChart"
+    ),
+
+    {
+
+        type: "line",
+
+        data: {
+
+            labels: labels,
+
+            datasets: [
+
+                {
+
+                    label:
+                        "People Booked",
+
+                    data: values,
+
+                    tension: 0.3,
+
+                    fill: true
+
+                }
+
+            ]
+
+        },
+
+        options: {
+
+            responsive: true,
+
+            scales: {
+
+                y: {
+
+                    beginAtZero: true,
+
+                    ticks: {
+
+                        precision: 0
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+);
+
+</script>
+
+{% endblock %}

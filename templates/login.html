@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+
+{% block title %}
+
+Login
+
+{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+
+    <div class="col-md-6">
+
+        <div class="card login-card shadow">
+
+            <div class="card-header bg-success text-white">
+
+                <h3 class="text-center">
+
+                    Login
+
+                </h3>
+
+            </div>
+
+            <div class="card-body">
+
+                <form
+                    method="POST"
+                    action="{{ url_for('auth.login') }}">
+
+                    <div class="mb-3">
+
+                        <label
+                            class="form-label">
+
+                            Email
+
+                        </label>
+
+                        <input
+                            type="email"
+                            name="email"
+                            class="form-control"
+                            placeholder="Enter your email"
+                            required>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label
+                            class="form-label">
+
+                            Password
+
+                        </label>
+
+                        <div class="password-wrapper">
+
+                         <input
+        type="password"
+        class="form-control"
+        id="password"
+        name="password"
+        placeholder="Enter your password"
+        required>
+
+    <button
+        type="button"
+        class="password-toggle"
+        id="passwordToggle"
+        aria-label="Show password">
+
+        👁
+
+    </button>
+
+</div>
+                    </div>
+
+                    <div
+                        class="form-check mb-3">
+
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            name="remember">
+
+                        <label
+                            class="form-check-label">
+
+                            Remember Me
+
+                        </label>
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="btn btn-success w-100">
+
+                        Login
+
+                    </button>
+
+                </form>
+
+                <hr>
+
+                <p class="text-center">
+
+                    New User?
+
+                    <a href="{{ url_for('auth.register') }}">
+
+                        Register Here
+
+                    </a>
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<script>
+
+    const passwordInput =
+        document.getElementById("password");
+
+    const passwordToggle =
+        document.getElementById("passwordToggle");
+
+
+    passwordToggle.addEventListener("click", function () {
+
+        if (passwordInput.type === "password") {
+
+            passwordInput.type = "text";
+
+            passwordToggle.textContent = "🙈";
+
+            passwordToggle.setAttribute(
+                "aria-label",
+                "Hide password"
+            );
+
+        } else {
+
+            passwordInput.type = "password";
+
+            passwordToggle.textContent = "👁";
+
+            passwordToggle.setAttribute(
+                "aria-label",
+                "Show password"
+            );
+
+        }
+
+    });
+
+</script>
+{% endblock %}

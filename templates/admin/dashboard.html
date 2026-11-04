@@ -1,0 +1,214 @@
+{% extends "base.html" %}
+
+{% block title %}
+Admin Dashboard
+{% endblock %}
+
+{% block content %}
+
+<div class="dashboard-layout">
+
+    <aside class="sidebar">
+
+        <div class="sidebar-profile">
+
+            <div>
+                <strong>Admin</strong>
+                <br>
+                <small>System Administrator</small>
+            </div>
+
+        </div>
+
+        <a
+            href="{{ url_for('admin.dashboard') }}"
+            class="active">
+
+            Dashboard
+
+        </a>
+
+        <a
+            href="{{ url_for('admin.manage_treks') }}">
+
+            Manage Treks
+
+        </a>
+
+        <a
+            href="{{ url_for('admin.manage_users') }}">
+
+            Manage Users
+
+        </a>
+
+        <a
+            href="{{ url_for('admin.manage_staff') }}">
+
+            Manage Staff
+
+        </a>
+
+        <a
+            href="{{ url_for('admin.manage_bookings') }}">
+
+            Bookings
+
+        </a>
+
+        <a
+            href="{{ url_for('charts.admin_charts') }}">
+
+            Reports
+
+        </a>
+
+        <a
+            href="{{ url_for('admin.profile') }}">
+
+            Profile
+
+        </a>
+
+        <a
+            href="{{ url_for('admin.settings') }}">
+
+            Settings
+
+        </a>
+
+        <a
+            href="{{ url_for('auth.logout') }}">
+
+            Logout
+
+        </a>
+
+    </aside>
+
+
+    <main class="dashboard-main">
+
+        <div class="row g-3">
+
+            <div class="col-md-3">
+
+                <div class="stat-card purple text-center">
+
+                    <h5>Total Users</h5>
+
+                    <h2>{{ total_users }}</h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-3">
+
+                <div class="stat-card green text-center">
+
+                    <h5>Trekkers</h5>
+
+                    <h2>{{ total_trekkers }}</h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-3">
+
+                <div class="stat-card yellow text-center">
+
+                    <h5>Trek Staff</h5>
+
+                    <h2>{{ total_staff }}</h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-3">
+
+                <div class="stat-card blue text-center">
+
+                    <h5>Administrators</h5>
+
+                    <h2>{{ total_admins }}</h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="row g-3 mt-1">
+
+            <div class="col-md-6">
+
+                <div class="dashboard-panel text-center">
+
+                    <h4>Total Treks</h4>
+
+                    <h1>{{ total_treks }}</h1>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6">
+
+                <div class="dashboard-panel text-center">
+
+                    <h4>Total Bookings</h4>
+
+                    <h1>{{ total_bookings }}</h1>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="row g-3 mt-1">
+
+            <div class="col-md-6">
+
+                <div class="dashboard-panel text-center">
+
+                    <h4>Open Treks</h4>
+
+                    <h1>{{ open_treks }}</h1>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6">
+
+                <div class="dashboard-panel text-center">
+
+                    <h4>Closed Treks</h4>
+
+                    <h1>{{ closed_treks }}</h1>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <hr class="my-4">
+
+    </main>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+
+{% block title %}
+Manage Users
+{% endblock %}
+
+{% block content %}
+
+<h2 class="mb-4">
+
+User Management
+
+</h2>
+
+<form
+method="GET"
+class="mb-3">
+
+<div class="input-group">
+
+<input
+type="text"
+name="search"
+class="form-control"
+placeholder="Search by name..."
+value="{{ search }}">
+
+<button
+class="btn btn-primary">
+
+Search
+
+</button>
+
+</div>
+
+</form>
+
+<table class="table table-bordered table-hover">
+
+<thead class="table-dark">
+
+<tr>
+
+<th>ID</th>
+
+<th>Name</th>
+
+<th>Email</th>
+
+<th>Role</th>
+
+<th>Phone</th>
+
+<th>Status</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for user in users %}
+
+<tr>
+
+<td>{{ user.id }}</td>
+
+<td>{{ user.full_name }}</td>
+
+<td>{{ user.email }}</td>
+
+<td>{{ user.role }}</td>
+
+<td>{{ user.phone_number }}</td>
+
+<td>
+
+{% if user.is_active %}
+
+<span class="badge bg-success">
+
+Active
+
+</span>
+
+{% else %}
+
+<span class="badge bg-danger">
+
+Inactive
+
+</span>
+
+{% endif %}
+
+</td>
+
+<td>
+
+{% if user.role!="Admin" %}
+
+<a
+href="{{ url_for('admin.toggle_user_status', user_id=user.id) }}"
+class="btn btn-warning btn-sm">
+
+{% if user.is_active %}
+
+Deactivate
+
+{% else %}
+
+Activate
+
+{% endif %}
+
+</a>
+<a
+href="{{ url_for('admin.blacklist_user', user_id=user.id) }}"
+class="btn btn-dark btn-sm">
+
+Blacklist
+
+</a>
+{% endif %}
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+{% endblock %}

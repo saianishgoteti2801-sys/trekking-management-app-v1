@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+
+{% block title %}
+Manage Treks
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>
+            Trek Management
+        </h2>
+
+        <a
+            href="{{ url_for('admin.create_trek') }}"
+            class="btn btn-success"
+        >
+            + Add Trek
+        </a>
+    </div>
+
+    <form method="GET" class="mb-3">
+        <div class="input-group">
+
+            <input
+                type="text"
+                class="form-control"
+                name="search"
+                placeholder="Search Trek"
+                value="{{ search }}"
+            >
+
+            <button
+                type="submit"
+                class="btn btn-primary"
+            >
+                Search
+            </button>
+
+        </div>
+    </form>
+
+    {% if treks %}
+
+        <div class="table-responsive">
+
+            <table class="table table-bordered table-hover align-middle">
+
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Trek Name</th>
+                        <th>Location</th>
+                        <th>Difficulty</th>
+                        <th>Duration</th>
+                        <th>Slots</th>
+                        <th>Status</th>
+                        <th>Assigned Staff</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for trek in treks %}
+
+                        <tr>
+
+                            <td>
+                                {{ trek.id }}
+                            </td>
+
+                            <td>
+                                {{ trek.trek_name }}
+                            </td>
+
+                            <td>
+                                {{ trek.location }}
+                            </td>
+
+                            <td>
+                                {{ trek.difficulty }}
+                            </td>
+
+                            <td>
+                                {{ trek.duration_days }} Days
+                            </td>
+
+                            <td>
+                                {{ trek.available_slots }}
+                            </td>
+
+                            <td>
+                                {{ trek.status }}
+                            </td>
+
+                            <td>
+                                {% if trek.assigned_staff %}
+                                    {{ trek.assigned_staff.full_name }}
+                                {% else %}
+                                    Not Assigned
+                                {% endif %}
+                            </td>
+
+                            <td>
+
+                                <!-- EDIT MUST BE GET -->
+                                <a
+                                    href="{{ url_for('admin.edit_trek', trek_id=trek.id) }}"
+                                    class="btn btn-warning btn-sm"
+                                >
+                                    Edit
+                                </a>
+
+                                <!-- DELETE MUST BE POST -->
+                                <form
+                                    method="POST"
+                                    action="{{ url_for('admin.delete_trek', trek_id=trek.id) }}"
+                                    onsubmit="return confirm('Delete this trek permanently?');"
+                                    style="display:inline;"
+                                >
+                                    <button
+                                        type="submit"
+                                        class="action-delete"
+                                    >
+                                        Delete
+                                    </button>
+                                </form>
+
+                                {% if trek.brochure_filename %}
+                                    <a
+                                        href="{{ url_for('admin.download_brochure', trek_id=trek.id) }}"
+                                        class="btn btn-info btn-sm">
+                                        Brochure
+                                    </a>
+                                {% else %}
+                                    <span class="text-muted d-block mt-1">
+                                        No Brochure
+                                    </span>
+                                {% endif %}
+
+                            </td>
+
+                        </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    {% else %}
+
+        <div class="alert alert-info">
+            No treks have been added yet.
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

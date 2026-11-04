@@ -1,0 +1,216 @@
+{% extends "base.html" %}
+
+{% block title %}
+Manage Trek
+{% endblock %}
+
+{% block content %}
+
+<h2>
+
+{{ trek.trek_name }}
+
+</h2>
+
+
+{% if trek.brochure_filename %}
+
+<div class="mb-3">
+
+<a
+    href="{{ url_for('staff.download_brochure', trek_id=trek.id) }}"
+    class="btn btn-info">
+    Download Brochure
+</a>
+
+</div>
+
+{% else %}
+
+<div class="alert alert-secondary">
+    No brochure has been uploaded for this trek.
+</div>
+
+{% endif %}
+<form method="POST">
+
+<div class="alert alert-info">
+
+Registered Participants :
+
+<strong>
+
+{{ participant_count }}
+
+</strong>
+
+</div>
+
+<div class="row">
+
+<div class="col-md-6">
+
+<label>
+
+Available Slots
+
+</label>
+
+<input
+
+type="number"
+
+name="available_slots"
+
+value="{{ trek.available_slots }}"
+
+class="form-control"
+
+required>
+
+</div>
+
+<div class="col-md-6">
+
+<label>
+
+Status
+
+</label>
+
+<select
+
+name="status"
+
+class="form-select">
+
+<option
+value="Open"
+{% if trek.status=="Open" %}selected{% endif %}>
+
+Open
+
+</option>
+
+<option
+value="Closed"
+{% if trek.status=="Closed" %}selected{% endif %}>
+
+Closed
+
+</option>
+
+<option
+value="Ongoing"
+{% if trek.status=="Ongoing" %}selected{% endif %}>
+
+Ongoing
+
+</option>
+
+<option
+value="Completed"
+{% if trek.status=="Completed" %}selected{% endif %}>
+
+Completed
+
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+<br>
+
+<button
+
+class="btn btn-success">
+
+Update Trek
+
+</button>
+
+</form>
+
+<hr>
+
+<h3>
+
+Registered Participants
+
+</h3>
+
+<table class="table table-bordered">
+
+<thead class="table-dark">
+
+<tr>
+
+<th>Name</th>
+
+<th>Email</th>
+
+<th>Booking Date</th>
+
+<th>Booking Status</th>
+
+<th>Payment</th>
+
+<th>People</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for booking in participants %}
+
+<tr>
+
+<td>
+
+{{ booking.user.full_name }}
+
+</td>
+
+<td>
+
+{{ booking.user.email }}
+
+</td>
+
+<td>
+
+{{ booking.booking_date.strftime("%d-%m-%Y") }}
+
+</td>
+
+<td>
+
+{{ booking.booking_status }}
+
+</td>
+<td>
+
+{{ booking.payment_status }}
+
+</td>
+
+<td>
+
+{{ booking.number_of_people }}
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+{% endblock %}

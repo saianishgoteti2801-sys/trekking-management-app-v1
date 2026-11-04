@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% block title %}
+Staff Profile
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <h2>
+            Staff Profile
+        </h2>
+
+        <a
+            href="{{ url_for('staff.dashboard') }}"
+            class="btn btn-secondary">
+
+            Back to Dashboard
+
+        </a>
+
+    </div>
+
+    <div class="card shadow rounded-4">
+
+        <div
+            class="card-header text-white"
+            style="
+                background-color: #6b7a1f;
+                border-radius: 16px 16px 0 0;
+            "
+        >
+
+            <h4 class="mb-0">
+                Staff Information
+            </h4>
+
+        </div>
+
+        <div class="card-body p-4">
+
+            <form method="POST">
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Specialization
+                    </label>
+
+                    <input
+                        type="text"
+                        name="specialization"
+                        class="form-control"
+                        value="{{ profile.specialization or '' }}"
+                        placeholder="e.g. Mountain Trekking"
+                    >
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Experience (Years)
+                    </label>
+
+                    <input
+                        type="number"
+                        name="experience"
+                        class="form-control"
+                        min="0"
+                        value="{{ profile.experience or 0 }}"
+                        required
+                    >
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Address
+                    </label>
+
+                    <textarea
+                        name="address"
+                        class="form-control"
+                        rows="3"
+                    >{{ profile.address or '' }}</textarea>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Emergency Contact
+                    </label>
+
+                    <input
+                        type="text"
+                        name="emergency_contact"
+                        class="form-control"
+                        value="{{ profile.emergency_contact or '' }}"
+                    >
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn"
+                    style="
+                        background-color: #6b7a1f;
+                        color: white;
+                        border-radius: 10px;
+                    "
+                >
+                    Save Profile
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

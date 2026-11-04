@@ -1,0 +1,187 @@
+{% extends "base.html" %}
+
+{% block title %}
+
+User Dashboard
+
+{% endblock %}
+
+{% block content %}
+
+<h2>
+
+Available Treks
+
+</h2>
+
+<form method="GET">
+
+<div class="input-group mb-3">
+
+<input
+
+class="form-control"
+
+type="text"
+
+name="search"
+
+placeholder="Search Trek"
+
+value="{{ search }}">
+
+<button
+
+class="btn btn-primary">
+
+Search
+
+</button>
+
+</div>
+
+</form>
+
+<div class="mb-3">
+
+<a
+href="{{ url_for('trek.profile') }}"
+class="btn btn-warning me-2">
+
+Profile
+
+</a>
+
+<a
+href="{{ url_for('trek.settings') }}"
+class="btn btn-secondary me-2">
+
+Settings
+
+</a>
+
+</div>
+
+<a
+
+href="{{ url_for('booking.history') }}"
+
+class="btn btn-info mb-3">
+
+My Booking History
+
+</a>
+
+<a
+    href="{{ url_for('charts.user_charts') }}"
+    class="btn btn-primary">
+
+    My Trekking Analytics
+
+</a>
+
+<table class="table table-bordered">
+
+<thead class="table-dark">
+
+<tr>
+
+<th>Name</th>
+
+<th>Location</th>
+
+<th>Difficulty</th>
+
+<th>Duration</th>
+
+<th>Slots</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for trek in treks %}
+
+<tr>
+
+<td>
+
+{{ trek.trek_name }}
+
+</td>
+
+<td>
+
+{{ trek.location }}
+
+</td>
+
+<td>
+
+{{ trek.difficulty }}
+
+</td>
+
+<td>
+
+{{ trek.duration_days }}
+
+Days
+
+</td>
+
+<td>
+
+{{ trek.available_slots }}
+
+</td>
+
+<td>
+
+<a
+
+class="btn btn-success"
+
+href="{{ url_for('booking.book_trek',trek_id=trek.id) }}">
+
+Book
+
+</a>
+
+{% if trek.brochure_filename %}
+
+<a
+
+class="btn btn-info ms-1"
+
+href="{{ url_for('trek.download_brochure', trek_id=trek.id) }}">
+
+Brochure
+
+</a>
+
+{% else %}
+
+<span class="text-muted ms-1">
+
+No Brochure
+
+</span>
+
+{% endif %}
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+{% endblock %}

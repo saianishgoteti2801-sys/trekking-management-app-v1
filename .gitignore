@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+env/
+
+# Local database and uploads
+instance/
+*.db
+static/uploads/
+
+# Secrets
+.env
+
+# macOS
+.DS_Store

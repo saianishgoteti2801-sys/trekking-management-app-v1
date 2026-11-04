@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}
+Select Role
+{% endblock %}
+
+{% block content %}
+
+<div class="role-selection-page">
+
+    <div class="role-selection-card">
+
+        <div class="role-selection-header">
+            LEGEND / ROLES
+        </div>
+
+        <div class="role-selection-body">
+
+            <a
+                href="{{ url_for('auth.login', role='admin') }}"
+                class="role-selection-option"
+            >
+
+                <div class="role-selection-icon">
+                    ♔
+                </div>
+
+                <div class="role-selection-name">
+                    Admin
+                </div>
+
+            </a>
+
+
+            <a
+                href="{{ url_for('auth.login', role='staff') }}"
+                class="role-selection-option"
+            >
+
+                <div class="role-selection-icon">
+                    ●
+                </div>
+
+                <div class="role-selection-name">
+                    Trek Staff
+                </div>
+
+            </a>
+
+
+            <a
+                href="{{ url_for('auth.login', role='trekker') }}"
+                class="role-selection-option"
+            >
+
+                <div class="role-selection-icon">
+                    🥾
+                </div>
+
+                <div class="role-selection-name">
+                    User (Trekker)
+                </div>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

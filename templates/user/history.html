@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block title %}
+
+Booking History
+
+{% endblock %}
+
+{% block content %}
+
+<h2>
+
+My Bookings
+
+</h2>
+
+<table class="table table-bordered table-hover">
+
+<thead class="table-dark">
+
+<tr>
+
+<th>Trek</th>
+
+<th>Date</th>
+
+<th>Status</th>
+
+<th>Payment</th>
+
+<th>Amount</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for booking in bookings %}
+
+<tr>
+
+<td>
+
+{{ booking.trek.trek_name }}
+
+</td>
+
+<td>
+
+{{ booking.booking_date.strftime("%d-%m-%Y") }}
+
+</td>
+
+<td>
+
+{{ booking.booking_status }}
+
+</td>
+
+<td>
+
+{{ booking.payment_status }}
+
+</td>
+
+<td>
+
+₹ {{ booking.total_amount }}
+
+</td>
+
+<td>
+
+{% if booking.booking_status=="Booked" %}
+
+<a
+
+href="{{ url_for('booking.cancel_booking',booking_id=booking.id) }}"
+
+class="btn btn-danger btn-sm"
+
+onclick="return confirm('Cancel booking?')">
+
+Cancel
+
+</a>
+
+{% endif %}
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+{% endblock %}
