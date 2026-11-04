@@ -19,7 +19,6 @@ A multi-role web application for organising treks, built with **Flask**, **Jinja
 - [Project Structure](#-project-structure)
 - [REST API](#-rest-api)
 - [Getting Started](#-getting-started)
-- [Project Report](#-project-report)
  
 ---
  
